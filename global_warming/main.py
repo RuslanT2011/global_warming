@@ -1,5 +1,5 @@
 import telebot
-from bot_logic import global_warming_briefly, global_warming_all
+from bot_logic import global_warming_briefly, global_warming_all, fighting, help
 import random
 import os
 
@@ -7,7 +7,8 @@ bot = telebot.TeleBot("8553695172:AAEkEsDcE1gSWiHktAzjNKFLveIKDQyTqYA")
 
 @bot.message_handler(commands=['start'])
 def send_welcome(message):
-    bot.reply_to(message, "Привет! Я твой Telegram бот. Напиши команду /hello, /bye, для краткого изучения информации о глобальном потеплении можете ввести /global_warming_briefly, для полной сводки - /global_warming_all, также вы можете подробно изучить, к чему может привести глобальное потепление по команде /the_consequences")
+    welcome=help()
+    bot.reply_to(message, welcome)
 
 @bot.message_handler(commands=['hello'])
 def send_hello(message):
@@ -32,6 +33,11 @@ def send_consequences(message):
     consequences=random.choice(os.listdir('Static/Image'))
     with open(f'Static/Image/{consequences}', 'rb') as f:  
         bot.send_photo(message.chat.id, f)
+
+@bot.message_handler(commands=['fighting'])
+def send_fighting(message):
+    methods=fighting()
+    bot.reply_to(message, f"Вот несколько способов борьбы с глобальным потеплением:        {methods}")
 
 # Запускаем бота
 bot.polling()
