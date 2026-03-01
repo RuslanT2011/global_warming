@@ -3,7 +3,7 @@ from bot_logic import global_warming_briefly, global_warming_all, fighting, help
 import random
 import os
 
-bot = telebot.TeleBot("8553695172:AAEkEsDcE1gSWiHktAzjNKFLveIKDQyTqYA")
+bot = telebot.TeleBot("TOKEN")
 
 @bot.message_handler(commands=['start'])
 def send_welcome(message):
@@ -40,4 +40,5 @@ def send_fighting(message):
     bot.reply_to(message, f"Вот несколько способов борьбы с глобальным потеплением:        {methods}")
 
 # Запускаем бота
+
 bot.polling()
